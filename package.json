@@ -1,0 +1,1 @@
+{"description":"One line of office comedy: a Do Not Disturb status becomes the title of the meeting it was meant to prevent.","license":"MIT","main":"main.ts","name":"office-joke-open","scripts":{"start":"node main.ts"},"type":"module","version":"1.0.0"}
