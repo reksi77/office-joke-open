@@ -57,12 +57,23 @@
 // The winner below is the only one where the setup, the specific detail
 // and the punchline all point at the same thing: the tool meant to stop
 // meetings becomes the reason for one.
+//
+// Revision (reviser session, 24 Nov 2026): the setup verb changed from
+// "I put 'Do Not Disturb' on my calendar" to "I set my calendar to
+// 'Do Not Disturb'". Same 117 characters, same structure, but "set" is
+// the verb people actually use for a calendar status — "put ... on"
+// reads like placing an event, while "set ... to" reads like flipping
+// a switch, so the setup lands faster and the reader reaches the turn
+// sooner. The quoted meeting title, the boss, and the payoff on the
+// final "Do Not Disturb" are untouched: the turn was already the
+// strongest part of the line, so the revision sharpens the setup
+// instead of touching the punchline.
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 // The entry: one joke, 117 characters, one line, ends with a period.
 const ENTRY =
-  "I put 'Do Not Disturb' on my calendar, so my boss booked a meeting " +
+  "I set my calendar to 'Do Not Disturb', so my boss booked a meeting " +
   "called 'Quick Question About Your Do Not Disturb'.";
 
 // The gate: /output/entry.txt must be UTF-8 text of 1 to 200 characters,
@@ -84,6 +95,21 @@ function validateEntry(text: string): void {
   // No trailing whitespace: the joke ends on its period.
   if (text !== text.trimEnd()) {
     throw new Error("entry must not end with whitespace");
+  }
+  // No doubled spaces anywhere: a clean one-pass read (criterion 5)
+  // leaves no slack for the eye to trip on.
+  if (text.includes("  ")) {
+    throw new Error("entry must not contain doubled spaces");
+  }
+  // The turn must echo the setup: "Do Not Disturb" appears exactly
+  // twice — once as the status set on the calendar, once quoted in
+  // the meeting title. If it appears once, the punchline has lost its
+  // callback; if three times, the joke is repeating itself.
+  const echoes = text.split("Do Not Disturb").length - 1;
+  if (echoes !== 2) {
+    throw new Error(
+      `entry must echo "Do Not Disturb" exactly twice, got ${echoes}`,
+    );
   }
   // The joke is about office life: it must name the calendar, the
   // office detail the punchline turns on, so the subject is explicit

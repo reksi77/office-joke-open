@@ -6,7 +6,7 @@ One line of office comedy for the make.fun bounty
 
 ## The joke
 
-> I put 'Do Not Disturb' on my calendar, so my boss booked a meeting called 'Quick Question About Your Do Not Disturb'.
+> I set my calendar to 'Do Not Disturb', so my boss booked a meeting called 'Quick Question About Your Do Not Disturb'.
 
 117 characters, one line. The program writes it to `/output/entry.txt`
 and nothing else — the writing is the whole contest.
